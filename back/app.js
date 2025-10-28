@@ -1,7 +1,7 @@
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
-import rateLimit from "express-rate-limit";
+import rateLimit, { MemoryStore } from "express-rate-limit";
 import { publicRoutesFactory } from "./routes/public.js";
 import { adminRoutesFactory } from "./routes/admin.js";
 import { initDb } from "./db.js";
@@ -18,7 +18,7 @@ app.use(express.json({ limit: process.env.JSON_LIMIT || "1mb" }));
 
 const db = await initDb();
 
-const rateLimiterStore = new rateLimit.MemoryStore();
+const rateLimiterStore = new MemoryStore();
 const publicLimiter = rateLimit({
   windowMs: RATE_LIMIT_WINDOW,
   max: RATE_LIMIT_MAX,
