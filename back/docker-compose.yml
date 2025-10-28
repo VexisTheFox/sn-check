@@ -1,0 +1,22 @@
+version: '3.8'
+services:
+  api:
+    build: .
+    ports:
+      - "3000:3000"
+    restart: always
+    env_file:
+      - .env
+    volumes:
+      - ./data:/app/data
+  caddy:
+    image: caddy:latest
+    ports:
+      - "80:80"
+      - "443:443"
+    restart: always
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile
+      - caddy_data:/data
+volumes:
+  caddy_data:

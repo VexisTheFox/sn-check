@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SerialCheck</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header>
+      <h1>SerialCheck</h1>
+      <p class="tagline">Verify product serial numbers and manage authenticity records.</p>
+    </header>
+
+    <main>
+      <section class="card" id="checker">
+        <h2>Check Serials</h2>
+        <p>Enter up to 10 serial numbers, one per line.</p>
+        <textarea id="serial-input" rows="6" placeholder="ABC123\nXYZ999"></textarea>
+        <div class="actions">
+          <button id="check-btn">Check Serials</button>
+          <span class="status-message" id="check-status"></span>
+        </div>
+        <div id="results" class="results"></div>
+      </section>
+
+      <section class="card" id="admin">
+        <div class="admin-header">
+          <h2>Admin</h2>
+          <button id="toggle-admin" aria-expanded="false">Show Admin Panel</button>
+        </div>
+
+        <div id="admin-panel" hidden>
+          <form id="login-form" class="stacked-form">
+            <h3>Login</h3>
+            <label>
+              <span>Username</span>
+              <input id="login-username" type="text" autocomplete="username" required />
+            </label>
+            <label>
+              <span>Password</span>
+              <input id="login-password" type="password" autocomplete="current-password" required />
+            </label>
+            <div class="actions">
+              <button type="submit">Login</button>
+              <span class="status-message" id="login-status"></span>
+            </div>
+          </form>
+
+          <div id="admin-content" hidden>
+            <div class="admin-actions">
+              <div class="token-status">
+                <span>Logged in as <strong id="admin-username"></strong></span>
+                <button id="logout-btn">Logout</button>
+              </div>
+              <div class="quick-actions">
+                <button id="refresh-list">Refresh List</button>
+                <button id="export-btn">Export JSON</button>
+                <button id="reformat-btn">Reformat DB</button>
+                <button id="reset-rate-btn">Reset Rate Limit</button>
+                <button id="clear-btn" class="danger">Clear All</button>
+              </div>
+              <span class="status-message" id="admin-status"></span>
+            </div>
+
+            <form id="add-form" class="stacked-form">
+              <h3>Add or Update Serial</h3>
+              <label>
+                <span>Serial Number</span>
+                <input id="add-sn" type="text" required />
+              </label>
+              <label>
+                <span>Status</span>
+                <select id="add-status">
+                  <option value="verified">Verified</option>
+                  <option value="fake">Fake</option>
+                  <option value="unknown">Unknown</option>
+                </select>
+              </label>
+              <label>
+                <span>Note</span>
+                <textarea id="add-note" rows="3" placeholder="Optional notes"></textarea>
+              </label>
+              <div class="actions">
+                <button type="submit">Save Serial</button>
+              </div>
+            </form>
+
+            <div class="table-wrapper">
+              <table id="serial-table">
+                <thead>
+                  <tr>
+                    <th>Serial</th>
+                    <th>Status</th>
+                    <th>Note</th>
+                    <th>Updated</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <small>&copy; <span id="year"></span> SerialCheck</small>
+    </footer>
+
+    <script type="module" src="main.js"></script>
+  </body>
+</html>
