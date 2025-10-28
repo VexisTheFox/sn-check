@@ -1,4 +1,4 @@
-const API_BASE = "/api";
+const API_BASE = "http://47.254.158.49/api";
 const TOKEN_KEY = "serialcheck_admin_token";
 const USERNAME_KEY = "serialcheck_admin_username";
 
@@ -111,7 +111,7 @@ toggleAdminBtn.addEventListener("click", () => {
   } else {
     adminPanel.setAttribute("hidden", "");
   }
-  const expanded = !isHidden;
+  const expanded = !adminPanel.hasAttribute("hidden");
   toggleAdminBtn.setAttribute("aria-expanded", String(expanded));
   toggleAdminBtn.textContent = expanded ? "Hide Admin Panel" : "Show Admin Panel";
 });
